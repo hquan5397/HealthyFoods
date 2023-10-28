@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "HealthyFoods.Core": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
