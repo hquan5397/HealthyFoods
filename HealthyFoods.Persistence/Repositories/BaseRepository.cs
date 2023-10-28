@@ -31,6 +31,8 @@ namespace HealthyFoods.Persistence.Repositories
             {
                 var createdEntity = await _dbSet.AddAsync(entity);
 
+                await _context.SaveChangesAsync();
+
                 return createdEntity.Entity;
             }
             catch(Exception ex)
@@ -45,6 +47,8 @@ namespace HealthyFoods.Persistence.Repositories
             try
             {
                 await _dbSet.AddRangeAsync(entities);
+
+                await _context.SaveChangesAsync();
 
                 return entities;
             }
@@ -133,24 +137,97 @@ namespace HealthyFoods.Persistence.Repositories
             }
         }
 
-        public Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, int pageIndex, int pageSize, bool isTracking = false)
+        public async Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, int pageIndex, int pageSize, bool isTracking = false)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = _dbSet.Where(predicate);
+
+                if (!isTracking)
+                {
+                    query = query.AsNoTracking();
+                }
+
+                if (includes != null)
+                {
+                    query = includes(query);
+                }
+
+                var items = await query.Skip(pageIndex).Take(pageSize).ToListAsync();
+
+                return items;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "error when retrieving data from database", ex.Message);
+                throw;
+            }
         }
 
-        public Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, Func<IQueryable<T>, IOrderedQueryable<T>> sort, int pageIndex, int pageSize, bool isTracking = false)
+        public async Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, Func<IQueryable<T>, IOrderedQueryable<T>> sort, int pageIndex, int pageSize, bool isTracking = false)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = _dbSet.Where(predicate);
+
+                if (!isTracking)
+                {
+                    query = query.AsNoTracking();
+                }
+
+                if(includes != null)
+                {
+                    query = includes(query);
+                }
+
+                if(sort != null)
+                {
+                    query = sort(query);
+                }
+
+                var items = await query.Skip(pageIndex).Take(pageSize).ToListAsync();
+
+                return items;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "error when retrieving data from database", ex.Message);
+                throw;
+            }
         }
 
-        public Task<T> UpdateAsync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var updatedEntity = _dbSet.Update(entity);
+
+                await _context.SaveChangesAsync();
+
+                return updatedEntity.Entity;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "error when updating  data from database", ex.Message);
+                throw;
+            }
         }
 
-        public Task<IEnumerable<T>> UpdateRangeAsync(IEnumerable<T> entities)
+        public async Task<IEnumerable<T>> UpdateRangeAsync(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _dbSet.UpdateRange(entities);
+
+                await _context.SaveChangesAsync();
+
+                return entities;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "error when updating data from database", ex.Message);
+                throw;
+            }
         }
     }
 }
