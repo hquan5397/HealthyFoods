@@ -1,14 +1,9 @@
-﻿using HealthyFoods.Persistence.Repositories.Interfaces;
+﻿using HealthyFoods.Core.Models;
+using HealthyFoods.Persistence.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HealthyFoods.Persistence.Repositories
 {
@@ -164,7 +159,7 @@ namespace HealthyFoods.Persistence.Repositories
             }
         }
 
-        public async Task<IEnumerable<T>> GetManyAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, Func<IQueryable<T>, IOrderedQueryable<T>> sort, int pageIndex, int pageSize, bool isTracking = false)
+        public async Task<PagingResponse<T>> GetManyAsync(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includes, Func<IQueryable<T>, IOrderedQueryable<T>> sort, int pageIndex, int pageSize, bool isTracking = false)
         {
             try
             {
@@ -187,7 +182,17 @@ namespace HealthyFoods.Persistence.Repositories
 
                 var items = await query.Skip(pageIndex).Take(pageSize).ToListAsync();
 
-                return items;
+                var total = await query.CountAsync();
+
+                var pagingReponse = new PagingResponse<T>()
+                {
+                    TotalRecords = total,
+                    Result = items,
+                    PageSize = pageSize,
+                    PageIndex = pageIndex
+                };
+
+                return pagingReponse;
             }
             catch (Exception ex)
             {

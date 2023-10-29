@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HealthyFood.Application\HealthyFood.Application.csproj" />
+    <ProjectReference Include="..\HealthyFoods.Application\HealthyFoods.Application.csproj" />
   </ItemGroup>
 
 </Project>

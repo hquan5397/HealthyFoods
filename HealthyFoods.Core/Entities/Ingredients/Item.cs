@@ -8,7 +8,9 @@
 
         public int Quantity { get; set; }
 
-        public static Item Create(string name, double price, int quantity)
+        public string ImportedFrom { get; set; } = string.Empty;
+
+        public static Item Create(string name, double price, int quantity, string importedFrom)
         {
             Item item = new Item()
             {
@@ -16,6 +18,7 @@
                 Name = name,
                 Price = price,
                 Quantity = quantity,
+                ImportedFrom = importedFrom,
                 CreatedDate = DateTime.UtcNow,
                 UpdatedDate = DateTime.UtcNow
             };
@@ -23,5 +26,19 @@
             return item;
         }
 
+        public void Update(string name, double price, int quantity, string importedFrom)
+        {
+            Name = name;
+            Price = price;
+            Quantity = quantity;
+            ImportedFrom = importedFrom;
+            UpdatedDate = DateTime.UtcNow;
+        }
+
+        public void Delete()
+        {
+            IsDeleted = true;
+            UpdatedDate = DateTime.UtcNow;
+        }
     }
 }

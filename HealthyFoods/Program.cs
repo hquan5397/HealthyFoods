@@ -1,4 +1,4 @@
-using HealthyFood.Application;
+using HealthyFoods.Application;
 using HealthyFoods;
 using HealthyFoods.Persistence;
 using Serilog;
@@ -13,6 +13,8 @@ builder.Services
     .RegisDenpendencies(configuration)
     .AddApplication();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
@@ -20,10 +22,10 @@ builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Confi
 
 var app = builder.Build();
 
+app.UseExceptionHandler("/Error");
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
