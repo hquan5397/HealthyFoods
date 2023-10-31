@@ -23,18 +23,9 @@ namespace HealthyFoods.Pages.Foods
             await base.OnInitializedAsync();
             try
             {
-              //  var foodPaginatedResult = await _foodService!.GetMany(new GetFoodsRequestModel() { PageIndex = 0, PageSize = 1000 });
+                var foodPaginatedResult = await _foodService!.GetMany(new GetFoodsRequestModel() { PageIndex = 0, PageSize = 1000 });
 
-                var fakeFood = new FoodResponseModel()
-                {
-                    Amount = 2,
-                    Price = 300_000,
-                    ImportedFrom = "CoopMart XLHN",
-                    CreatedDate = DateTime.Now,
-                    FoodName = "Beef"
-                };
-
-                Foods = new List<FoodResponseModel> { fakeFood, fakeFood };
+                Foods = foodPaginatedResult.Result.ToList();
             }
             catch(Exception ex)
             {

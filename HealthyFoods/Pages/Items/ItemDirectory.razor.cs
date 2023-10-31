@@ -25,18 +25,9 @@ public partial class ItemDirectory
 
         try
         {
-            //  var foodPaginatedResult = await FoodService.GetMany(new GetFoodsRequestModel() { PageIndex = 0, PageSize = 15 });
+             var foodPaginatedResult = await _itemService!.GetMany(new GetItemsRequestModel() { PageIndex = 0, PageSize = 1000 });
 
-            var fakeItem = new ItemReponseModel()
-            {
-                Quantity = 1,
-                Price = 186_000,
-                ImportedFrom = "CoopMart XLHN",
-                CreatedDate = DateTime.Now,
-                ItemName = "Olive oil"
-            };
-
-            Items = new List<ItemReponseModel> { fakeItem };         
+            Items = foodPaginatedResult.Result.ToList();
         }
         catch(Exception ex)
         {

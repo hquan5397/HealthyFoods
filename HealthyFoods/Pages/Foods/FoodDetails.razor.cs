@@ -8,7 +8,7 @@ namespace HealthyFoods.Pages.Foods;
 public partial class FoodDetails
 {
     [Inject]
-    protected NavigationManager? _navigationManager { get; set; }
+    protected NavigationManager? _navigatcionManager { get; set; }
 
     [Inject]
     protected IFoodService? _foodService { get; set; }
@@ -91,7 +91,7 @@ public partial class FoodDetails
             await _sweetAlert!.FireAsync(new SweetAlertOptions
             {
                 Html = "Successfully updated or imported",
-                Icon = SweetAlertIcon.Success
+                Icon = SweetAlertIcon.Success,
             });
         }
         catch(Exception ex)
