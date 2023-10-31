@@ -4,7 +4,7 @@
     {
         public string ItemName { get; set; } = string.Empty;
 
-        public double Amount { get; set; }
+        public double Quantity { get; set; }
 
         public double Price { get; set; }
 

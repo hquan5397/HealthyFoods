@@ -1,0 +1,24 @@
+﻿@page "/item"
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Imported From</th>
+            <th>Imported Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Items)
+        {
+        <td>@item.ItemName</td>
+        <td>@item.Quantity</td>
+        <td>@item.Price</td>
+        <td>@item.ImportedFrom</td>
+        <td>@item.CreatedDate</td>
+        }
+    </tbody>
+</table>
