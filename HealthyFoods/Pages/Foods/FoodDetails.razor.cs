@@ -39,9 +39,11 @@ public partial class FoodDetails
                     {
                         FoodName = getFoodResult.FoodName,
                         Amount = getFoodResult.Amount,
-                        Price = getFoodResult.Price,
+                        PricePerKg = getFoodResult.PricePerKg,
                         ImportedFrom = getFoodResult.ImportedFrom,
-                        ImportedDate = getFoodResult.CreatedDate
+                        ImportedDate = getFoodResult.CreatedDate,
+                        OriginalPrice= getFoodResult.OriginalPrice,
+                        TotalPrice= getFoodResult.TotalPrice,
                     };
 
                     StateHasChanged();
@@ -69,8 +71,9 @@ public partial class FoodDetails
                     Id = Food.Id.Value,
                     FoodName = Food.FoodName,
                     Amount = Food.Amount,
-                    Price = Food.Price,
+                    PricePerKg = Food.PricePerKg,
                     ImportedFrom = Food.ImportedFrom,
+                    OriginalPrice = Food.OriginalPrice,
                 };
 
                 await _foodService!.Update(updateFoodModel);
@@ -81,8 +84,9 @@ public partial class FoodDetails
                 {
                     FoodName = Food.FoodName,
                     Amount = Food.Amount,
-                    Price = Food.Price,
+                    PricePerKg = Food.PricePerKg,
                     ImportedFrom = Food.ImportedFrom,
+                    OriginalPrice = Food.OriginalPrice,
                 };
 
                 await _foodService!.Import(createFoodModel);
@@ -115,7 +119,11 @@ public class FoodModel
 
     public double Amount { get; set; }
 
-    public double Price { get; set; }
+    public double OriginalPrice { get; set; }
+
+    public double PricePerKg { get; set; }
+
+    public double TotalPrice { get; set; }
 
     public string ImportedFrom { get; set; } = string.Empty;
 

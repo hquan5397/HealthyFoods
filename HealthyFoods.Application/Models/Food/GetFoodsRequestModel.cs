@@ -1,15 +1,14 @@
 ﻿using HealthyFoods.Core.Models;
 
-namespace HealthyFoods.Application.Models.Food
+namespace HealthyFoods.Application.Models.Food;
+
+public class GetFoodsRequestModel : PagingRequest
 {
-    public class GetFoodsRequestModel : PagingRequest
-    {
-        public List<string> FoodNames { get; set; } = new List<string>();
+    public List<string> FoodNames { get; set; } = new List<string>();
 
-        public List<Guid> FoodIds { get; set; } = new();
+    public List<Guid> FoodIds { get; set; } = new();
 
-        public DateTime? From { get; set; }
+    public DateTime? From { get; set; }
 
-        public DateTime? To { get; set; }
-    }
+    public DateTime? To { get; set; }
 }

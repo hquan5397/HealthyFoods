@@ -4,19 +4,22 @@
     {
         public string Name { get; set; } = string.Empty;
 
-        public double Price { get; set; }
+        public double OriginalPrice { get; set; }
+
+        public double PricePerKg { get; set; }
 
         public double Amount { get; set; }
 
         public string ImportedFrom { get; set; } = string.Empty;
 
-        public static Food Create(string name, double price, double amount, string importedFrom)
+        public static Food Create(string name, double orgiginalPrice, double price, double amount, string importedFrom)
         {
             var food = new Food
             {
                 Id = Guid.NewGuid(),
                 Name = name,
-                Price = price,
+                OriginalPrice = orgiginalPrice,
+                PricePerKg = price,
                 Amount = amount,
                 ImportedFrom = importedFrom,
                 CreatedDate = DateTime.UtcNow,
@@ -26,10 +29,11 @@
             return food;
         }
 
-        public void Update(string name, double price, double amount, string importedFrom)
+        public void Update(string name,double originalPrice, double price, double amount, string importedFrom)
         {
             Name = name;
-            Price = price;
+            OriginalPrice = originalPrice;
+            PricePerKg = price;
             Amount = amount;
             ImportedFrom = importedFrom;
             UpdatedDate = DateTime.UtcNow;

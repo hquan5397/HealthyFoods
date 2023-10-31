@@ -6,7 +6,8 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Amount</th>
+                <th>Amount(Kg)</th>
+                <th>Original Price</th>
                 <th>Price(VND)</th>
                 <th>Imported From</th>
                 <th>Imported Date</th>
@@ -21,7 +22,9 @@
 
                     <td>@food.Amount</td>
 
-                    <td>@food.Price.ToString("N0")</td>
+                    <td>@food.OriginalPrice</td>
+
+                    <td>@food.PricePerKg.ToString("N0")</td>
 
                     <td>@food.ImportedFrom</td>
 

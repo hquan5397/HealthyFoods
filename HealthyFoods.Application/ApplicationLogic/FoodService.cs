@@ -101,7 +101,8 @@ namespace HealthyFoods.Application.ApplicationLogic
             {
                 var food = Food.Create(
                     name: model.FoodName,
-                    price: model.Price,
+                    orgiginalPrice: model.OriginalPrice,
+                    price: model.PricePerKg,
                     amount: model.Amount,
                     importedFrom: model.ImportedFrom);
 
@@ -131,7 +132,8 @@ namespace HealthyFoods.Application.ApplicationLogic
 
                 food.Update(
                     name: model.FoodName,
-                    price: model.Price,
+                    originalPrice: model.OriginalPrice,
+                    price: model.PricePerKg,
                     amount: model.Amount,
                     importedFrom: model.ImportedFrom);
 

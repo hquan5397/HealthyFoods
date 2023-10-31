@@ -1,18 +1,18 @@
-﻿using HealthyFoods.Application.Models.Item;
+﻿using HealthyFoods.Application.Models;
+using HealthyFoods.Application.Models.Item;
 using HealthyFoods.Core.Models;
 
-namespace HealthyFoods.Application.ApplicationLogic.Interfaces
+namespace HealthyFoods.Application.ApplicationLogic.Interfaces;
+
+public interface IItemService
 {
-    public interface IItemService
-    {
-        Task<ItemReponseModel> Import(CreateItemModel model);
+    Task<ItemReponseModel> Import(CreateItemModel model);
 
-        Task<Guid> Delete(Guid id);
+    Task<Guid> Delete(Guid id);
 
-        Task<ItemReponseModel> Update(UpdateItemModel model);
+    Task<ItemReponseModel> Update(UpdateItemModel model);
 
-        Task<ItemReponseModel> Get(Guid id);
+    Task<ItemReponseModel> Get(Guid id);
 
-        Task<PagingResponse<ItemReponseModel>> GetMany(GetItemsRequestModel model);
-    }
+    Task<PagingResponse<ItemReponseModel>> GetMany(GetItemsRequestModel model);
 }

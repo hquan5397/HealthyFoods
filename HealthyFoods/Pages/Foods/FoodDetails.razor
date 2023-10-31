@@ -11,8 +11,11 @@
         <label for="lname">Amount</label>
         <input type="number" id="lname" step="0.01" name="amount" placeholder="Amount.." @bind="Food.Amount">
 
-        <label for="lname">Price</label>
-        <input type="number" id="lname" name="price" placeholder="Price.." @bind="Food.Price">
+        <label for="lname">Original Price</label>
+        <input type="number" id="lname" name="orgprice" placeholder="Original price.." @bind="Food.OriginalPrice">
+
+        <label for="lname">Price Per Kg</label>
+        <input type="number" id="lname" name="price" placeholder="Price.." @bind="Food.PricePerKg">
 
         <label for="lname">Imported from</label>
         <input type="text" id="lname" name="importedFrom" placeholder="Imported from.." @bind="Food.ImportedFrom">

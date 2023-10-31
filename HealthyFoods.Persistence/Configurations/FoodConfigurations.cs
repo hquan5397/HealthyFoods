@@ -19,7 +19,7 @@ namespace HealthyFoods.Persistence.Configurations
             builder.Property(x => x.Amount)
                 .IsRequired();
 
-            builder.Property(x => x.Price) 
+            builder.Property(x => x.PricePerKg) 
                 .IsRequired();
         }
 
@@ -36,7 +36,7 @@ namespace HealthyFoods.Persistence.Configurations
             builder.Property(x => x.Quantity)
                 .IsRequired();
 
-            builder.Property(x => x.Price)
+            builder.Property(x => x.PricePerEach)
                 .IsRequired();
         }
     }

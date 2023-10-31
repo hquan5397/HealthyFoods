@@ -39,9 +39,10 @@ public partial class ItemDetails
                     {
                         ItemName = getItemResult.ItemName,
                         Quantity = getItemResult.Quantity,
-                        Price = getItemResult.Price,
+                        PricePerEach = getItemResult.PricePerEach,
                         ImportedFrom = getItemResult.ImportedFrom,
-                        ImportedDate = getItemResult.CreatedDate
+                        ImportedDate = getItemResult.CreatedDate,
+                        OriginalPrice = getItemResult.OriginalPrice,
                     };
 
                     StateHasChanged();
@@ -69,8 +70,9 @@ public partial class ItemDetails
                     Id = Item.Id.Value,
                     ItemName = Item.ItemName,
                     Quantity = Item.Quantity,
-                    Price = Item.Price,
+                    PricePerEach = Item.PricePerEach,
                     ImportedFrom = Item.ImportedFrom,
+                    OriginalPrice = Item.OriginalPrice,
                 };
 
                 await _itemService!.Update(updateItemModel);
@@ -81,8 +83,9 @@ public partial class ItemDetails
                 {
                     ItemName = Item.ItemName,
                     Quantity = Item.Quantity,
-                    Price = Item.Price,
+                    PricePerEach = Item.PricePerEach,
                     ImportedFrom = Item.ImportedFrom,
+                    OriginalPrice = Item.OriginalPrice,
                 };
 
                 await _itemService!.Import(createItemModel);
@@ -115,7 +118,9 @@ public class ItemModel
 
     public int Quantity { get; set; }
 
-    public double Price { get; set; }
+    public double OriginalPrice { get; set; }
+
+    public double PricePerEach { get; set; }
 
     public string ImportedFrom { get; set; } = string.Empty;
 

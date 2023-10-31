@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using HealthyFoods.Application.Models.Item;
+using HealthyFoods.Application.Models;
 using HealthyFoods.Core.Entities.Ingredients;
 
-namespace HealthyFoods.Application.MapperProfiles
+namespace HealthyFoods.Application.MapperProfiles;
+
+public class ItemProfile : Profile
 {
-    public class ItemProfile : Profile
+    public ItemProfile()
     {
-        public ItemProfile()
-        {
-            CreateMap<Item, ItemReponseModel>();
-        }
+        CreateMap<Item, ItemReponseModel>();
     }
 }

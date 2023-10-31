@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HealthyFoods.Application.ApplicationLogic.Interfaces;
+using HealthyFoods.Application.Models;
 using HealthyFoods.Application.Models.Item;
 using HealthyFoods.Core.Entities.Ingredients;
 using HealthyFoods.Core.Extensions;
@@ -101,7 +102,8 @@ public class ItemService : IItemService
         {
             var item = Item.Create(
                 name: model.ItemName,
-                price: model.Price,
+                originalPrice: model.OriginalPrice,
+                price: model.PricePerEach,
                 quantity: model.Quantity,
                 importedFrom: model.ImportedFrom);
 
@@ -131,7 +133,8 @@ public class ItemService : IItemService
 
             item.Update(
                 name: model.ItemName,
-                price: model.Price,
+                originalPrice: model.OriginalPrice,
+                price: model.PricePerEach,
                 quantity: model.Quantity,
                 importedFrom: model.ImportedFrom);
 

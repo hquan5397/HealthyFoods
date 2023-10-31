@@ -6,7 +6,9 @@
 
         public int Quantity { get; set; }
 
-        public double Price { get; set; }
+        public double OriginalPrice { get; set; }
+
+        public double PricePerEach { get; set; }
 
         public string ImportedFrom { get; set; } = string.Empty;
     }

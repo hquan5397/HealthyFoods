@@ -1,5 +1,6 @@
 ﻿using CurrieTechnologies.Razor.SweetAlert2;
 using HealthyFoods.Application.ApplicationLogic.Interfaces;
+using HealthyFoods.Application.Models;
 using HealthyFoods.Application.Models.Item;
 using Microsoft.AspNetCore.Components;
 

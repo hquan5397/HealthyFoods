@@ -1,15 +1,19 @@
-﻿namespace HealthyFoods.Application.Models.Item
+﻿namespace HealthyFoods.Application.Models;
+
+public class ItemReponseModel
 {
-    public class ItemReponseModel
-    {
-        public string ItemName { get; set; } = string.Empty;
+    public string ItemName { get; set; } = string.Empty;
 
-        public int Quantity { get; set; }
+    public int Quantity { get; set; }
 
-        public double Price { get; set; }
+    public double OriginalPrice { get; set; }
 
-        public string ImportedFrom { get; set; } = string.Empty;
+    public double PricePerEach { get; set; }
 
-        public DateTime CreatedDate { get; set; }
-    }
+    public string ImportedFrom { get; set; } = string.Empty;
+
+    public double TotalPrice => PricePerEach * Quantity;
+
+    public DateTime CreatedDate { get; set; }
 }
+
