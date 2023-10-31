@@ -1,25 +1,35 @@
 ﻿@page "/food"
 
+<div class="containter">
+    <button type="button" class="btn btn-primary" onclick="@(() => OnAddNewClicked())">Add new Food</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Price(VND)</th>
+                <th>Imported From</th>
+                <th>Imported Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var food in Foods)
+            {
+                <td>@food.FoodName</td>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Price</th>
-            <th>Imported From</th>
-            <th>Imported Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var food in Foods)
-        {
-        <td>@food.FoodName</td>
-        <td>@food.Amount</td>
-        <td>@food.Price</td>
-        <td>@food.ImportedFrom</td>
-        <td>@food.CreatedDate</td>
-        }
-    </tbody>
-</table>
+                <td>@food.Amount</td>
 
+                <td>@food.Price.ToString("N0")</td>
+
+                <td>@food.ImportedFrom</td>
+
+                <td>@food.CreatedDate</td>
+                <td>
+                    <button type="button" class="btn btn-success">Edit</button>
+                </td>
+            }
+        </tbody>
+    </table>
+
+</div>
