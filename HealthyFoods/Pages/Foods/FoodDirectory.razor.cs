@@ -34,7 +34,7 @@ namespace HealthyFoods.Pages.Foods
                     FoodName = "Beef"
                 };
 
-                Foods = new List<FoodResponseModel> { fakeFood };
+                Foods = new List<FoodResponseModel> { fakeFood, fakeFood };
             }
             catch(Exception ex)
             {

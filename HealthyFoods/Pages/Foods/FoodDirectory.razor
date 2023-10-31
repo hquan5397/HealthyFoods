@@ -16,18 +16,20 @@
         <tbody>
             @foreach (var food in Foods)
             {
-                <td>@food.FoodName</td>
+                <tr>
+                    <td>@food.FoodName</td>
 
-                <td>@food.Amount</td>
+                    <td>@food.Amount</td>
 
-                <td>@food.Price.ToString("N0")</td>
+                    <td>@food.Price.ToString("N0")</td>
 
-                <td>@food.ImportedFrom</td>
+                    <td>@food.ImportedFrom</td>
 
-                <td>@food.CreatedDate</td>
-                <td>
-                    <button type="button" class="btn btn-success">Edit</button>
-                </td>
+                    <td>@food.CreatedDate</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" style="background-color: blue">Edit</button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
