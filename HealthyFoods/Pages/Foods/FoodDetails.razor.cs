@@ -93,6 +93,8 @@ public partial class FoodDetails
                 Html = "Successfully updated or imported",
                 Icon = SweetAlertIcon.Success,
             });
+
+            _navigatcionManager!.NavigateTo("/food");
         }
         catch(Exception ex)
         {

@@ -93,6 +93,8 @@ public partial class ItemDetails
                 Html = "Successfully updated or imported",
                 Icon = SweetAlertIcon.Success
             });
+
+            _navigationManager!.NavigateTo("/item");
         }
         catch (Exception ex)
         {
