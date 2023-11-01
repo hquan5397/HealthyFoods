@@ -10,9 +10,9 @@ namespace HealthyFoods.Persistence
         
         }
 
-        public DbSet<Food> Foods { get; set; }
+        public DbSet<ImportedFood> Foods { get; set; }
 
-        public DbSet<Item> Items { get; set; }
+        public DbSet<ImportedItem> Items { get; set; }
 
     }
 }

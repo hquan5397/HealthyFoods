@@ -3,6 +3,7 @@ using HealthyFoods;
 using HealthyFoods.Persistence;
 using Serilog;
 using CurrieTechnologies.Razor.SweetAlert2;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSweetAlert2();
+builder.Services.AddSyncfusionBlazor();
 
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 

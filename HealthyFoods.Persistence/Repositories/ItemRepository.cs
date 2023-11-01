@@ -2,10 +2,9 @@
 using HealthyFoods.Persistence.Repositories.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace HealthyFoods.Persistence.Repositories
+namespace HealthyFoods.Persistence.Repositories;
+
+public class ItemRepository : BaseRepository<ImportedItem>, IItemRepository
 {
-    public class ItemRepository : BaseRepository<Item>, IItemRepository
-    {
-        public ItemRepository(DatabaseContext context, ILogger<ItemRepository> logger) : base(context, logger) { }
-    }
+    public ItemRepository(DatabaseContext context, ILogger<ItemRepository> logger) : base(context, logger) { }
 }

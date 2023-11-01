@@ -2,7 +2,7 @@
 
 namespace HealthyFoods.Application.Models.Food;
 
-public class GetFoodsRequestModel : PagingRequest
+public class GetImportedFoodsRequestModel : PagingRequest
 {
     public List<string> FoodNames { get; set; } = new List<string>();
 

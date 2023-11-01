@@ -1,27 +1,29 @@
-﻿@page "/food/{foodId}"
+﻿@page "/imported-food/{importedFoodId}"
 
 <div class="Container">
-    <EditForm Model="@Food" OnValidSubmit="@(() => Summit())">
+    <EditForm Model="@ImportedFood" OnValidSubmit="@(() => Summit())">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
         <label for="fname">Food Name</label>
-        <input type="text" id="fname" name="foodName" placeholder="Food name.." @bind="Food.FoodName">
+        <SfDropDownList TValue="Guid" TItem="RawFoodModel" Placeholder="Select a game" DataSource="@ImportedFood.RawFoods">
+            <DropDownListFieldSettings Value="Id" Text="Text"></DropDownListFieldSettings>
+        </SfDropDownList>
 
         <label for="lname">Amount</label>
-        <input type="number" id="lname" step="0.01" name="amount" placeholder="Amount.." @bind="Food.Amount">
+        <input type="number" id="lname" step="0.01" name="amount" placeholder="Amount.." @bind="ImportedFood.Amount">
 
         <label for="lname">Original Price</label>
-        <input type="number" id="lname" name="orgprice" placeholder="Original price.." @bind="Food.OriginalPrice">
+        <input type="number" id="lname" name="orgprice" placeholder="Original price.." @bind="ImportedFood.OriginalPrice">
 
         <label for="lname">Price Per Kg</label>
-        <input type="number" id="lname" name="price" placeholder="Price.." @bind="Food.PricePerKg">
+        <input type="number" id="lname" name="price" placeholder="Price.." @bind="ImportedFood.PricePerKg">
 
         <label for="lname">Imported from</label>
-        <input type="text" id="lname" name="importedFrom" placeholder="Imported from.." @bind="Food.ImportedFrom">
+        <input type="text" id="lname" name="importedFrom" placeholder="Imported from.." @bind="ImportedFood.ImportedFrom">
 
         <label for="lname">Imported Date(MM/dd/yyyy)</label>
-        <input type="datetime-local" id="lname" name="importedDate" placeholder="" @bind="Food.ImportedDate" disabled>
+        <input type="datetime-local" id="lname" name="importedDate" placeholder="" @bind="ImportedFood.ImportedDate" disabled>
         <button type="submit">Submit</button>
     </EditForm>
 

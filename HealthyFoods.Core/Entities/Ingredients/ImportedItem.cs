@@ -1,40 +1,40 @@
 ﻿namespace HealthyFoods.Core.Entities.Ingredients
 {
-    public class Food : BaseEntity
+    public class ImportedItem : BaseEntity
     {
         public string Name { get; set; } = string.Empty;
 
         public double OriginalPrice { get; set; }
 
-        public double PricePerKg { get; set; }
+        public double PricePerEach { get; set; }
 
-        public double Amount { get; set; }
+        public int Quantity { get; set; }
 
         public string ImportedFrom { get; set; } = string.Empty;
 
-        public static Food Create(string name, double orgiginalPrice, double price, double amount, string importedFrom)
+        public static ImportedItem Create(string name, double originalPrice, double price, int quantity, string importedFrom)
         {
-            var food = new Food
+            ImportedItem item = new ImportedItem()
             {
                 Id = Guid.NewGuid(),
                 Name = name,
-                OriginalPrice = orgiginalPrice,
-                PricePerKg = price,
-                Amount = amount,
+                OriginalPrice = originalPrice,
+                PricePerEach = price,
+                Quantity = quantity,
                 ImportedFrom = importedFrom,
                 CreatedDate = DateTime.UtcNow,
                 UpdatedDate = DateTime.UtcNow
             };
 
-            return food;
+            return item;
         }
 
-        public void Update(string name,double originalPrice, double price, double amount, string importedFrom)
+        public void Update(string name, double originalPrice, double price, int quantity, string importedFrom)
         {
             Name = name;
             OriginalPrice = originalPrice;
-            PricePerKg = price;
-            Amount = amount;
+            PricePerEach = price;
+            Quantity = quantity;
             ImportedFrom = importedFrom;
             UpdatedDate = DateTime.UtcNow;
         }

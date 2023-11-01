@@ -49,7 +49,7 @@ public class ItemService : IItemService
     {
         try
         {
-            Expression<Func<Item, bool>> itemFilter = x => x.IsDeleted == false;
+            Expression<Func<ImportedItem, bool>> itemFilter = x => x.IsDeleted == false;
 
             if (model.ItemNames.Any())
             {
@@ -100,7 +100,7 @@ public class ItemService : IItemService
     {
         try
         {
-            var item = Item.Create(
+            var item = ImportedItem.Create(
                 name: model.ItemName,
                 originalPrice: model.OriginalPrice,
                 price: model.PricePerEach,

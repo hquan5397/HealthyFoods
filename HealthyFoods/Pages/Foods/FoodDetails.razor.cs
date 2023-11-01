@@ -11,15 +11,18 @@ public partial class FoodDetails
     protected NavigationManager? _navigatcionManager { get; set; }
 
     [Inject]
-    protected IFoodService? _foodService { get; set; }
+    protected IImportedFoodService? _importedFoodService { get; set; }
+
+    [Inject]
+    protected IRawFoodService? _rawFoodService { get; set; }
 
     [Inject]
     protected SweetAlertService? _sweetAlert { get; set; }
 
     [Parameter]
-    public string FoodId { get; set; } = Guid.Empty.ToString();
+    public string ImportedFoodId { get; set; } = Guid.Empty.ToString();
 
-    public FoodModel Food { get; set; } = new();
+    public ImportedFoodModel ImportedFood { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -27,23 +30,38 @@ public partial class FoodDetails
 
         try
         {
-            if (Guid.TryParse(FoodId, out var foodId) && FoodId != Guid.Empty.ToString())
-            {
-                Food.Id = foodId;
+            //var rawFoods = await _rawFoodService!.GetAll();
 
-                var getFoodResult = await _foodService!.Get(foodId);
+            //ImportedFood.RawFoods = rawFoods.Select(x => new RawFoodModel()
+            //    {
+            //        Id = x.Key,
+            //        Text = x.Value
+            //    }
+            //);
+
+            ImportedFood.RawFoods = new[] { 
+                new RawFoodModel() { Id = Guid.NewGuid(), Text = "Beef" },
+                new RawFoodModel() {Id = Guid.NewGuid(), Text = "Pork"},
+                new RawFoodModel() {Id = Guid.NewGuid(), Text = "Fish"}
+            };
+
+            if (Guid.TryParse(ImportedFoodId, out var foodId) && ImportedFoodId != Guid.Empty.ToString())
+            {
+                ImportedFood.Id = foodId;
+
+                var getFoodResult = await _importedFoodService!.Get(foodId);
 
                 if (getFoodResult != null)
                 {
-                    Food = new FoodModel()
+                    ImportedFood = new ImportedFoodModel()
                     {
                         FoodName = getFoodResult.FoodName,
                         Amount = getFoodResult.Amount,
                         PricePerKg = getFoodResult.PricePerKg,
                         ImportedFrom = getFoodResult.ImportedFrom,
                         ImportedDate = getFoodResult.CreatedDate,
-                        OriginalPrice= getFoodResult.OriginalPrice,
-                        TotalPrice= getFoodResult.TotalPrice,
+                        OriginalPrice = getFoodResult.OriginalPrice,
+                        TotalPrice = getFoodResult.TotalPrice,
                     };
 
                     StateHasChanged();
@@ -64,32 +82,32 @@ public partial class FoodDetails
     {
         try
         {
-            if (Food.Id.HasValue)
+            if (ImportedFood.Id.HasValue)
             {
-                var updateFoodModel = new UpdateFoodModel()
+                var updateFoodModel = new UpdateImportedFoodModel()
                 {
-                    Id = Food.Id.Value,
-                    FoodName = Food.FoodName,
-                    Amount = Food.Amount,
-                    PricePerKg = Food.PricePerKg,
-                    ImportedFrom = Food.ImportedFrom,
-                    OriginalPrice = Food.OriginalPrice,
+                    Id = ImportedFood.Id.Value,
+                    RawFoodId = ImportedFood.RawFoodId,
+                    Amount = ImportedFood.Amount,
+                    PricePerKg = ImportedFood.PricePerKg,
+                    ImportedFrom = ImportedFood.ImportedFrom,
+                    OriginalPrice = ImportedFood.OriginalPrice,
                 };
 
-                await _foodService!.Update(updateFoodModel);
+                await _importedFoodService!.Update(updateFoodModel);
             }
             else
             {
-                var createFoodModel = new CreateFoodModel()
+                var createFoodModel = new CreateImportedFoodModel()
                 {
-                    FoodName = Food.FoodName,
-                    Amount = Food.Amount,
-                    PricePerKg = Food.PricePerKg,
-                    ImportedFrom = Food.ImportedFrom,
-                    OriginalPrice = Food.OriginalPrice,
+                    RawFoodId = ImportedFood.RawFoodId,
+                    Amount = ImportedFood.Amount,
+                    PricePerKg = ImportedFood.PricePerKg,
+                    ImportedFrom = ImportedFood.ImportedFrom,
+                    OriginalPrice = ImportedFood.OriginalPrice,
                 };
 
-                await _foodService!.Import(createFoodModel);
+                await _importedFoodService!.Import(createFoodModel);
             }
 
             await _sweetAlert!.FireAsync(new SweetAlertOptions
@@ -100,7 +118,7 @@ public partial class FoodDetails
 
             _navigatcionManager!.NavigateTo("/food");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             await _sweetAlert!.FireAsync(new SweetAlertOptions
             {
@@ -111,11 +129,13 @@ public partial class FoodDetails
     }
 }
 
-public class FoodModel
+public class ImportedFoodModel
 {
     public Guid? Id { get; set; }
 
     public string FoodName { get; set; } = string.Empty;
+
+    public Guid RawFoodId { get; set; }
 
     public double Amount { get; set; }
 
@@ -128,4 +148,12 @@ public class FoodModel
     public string ImportedFrom { get; set; } = string.Empty;
 
     public DateTime ImportedDate { get; set; }
+
+    public IEnumerable<RawFoodModel> RawFoods { get; set; } = Enumerable.Empty<RawFoodModel>();
+}
+
+public class RawFoodModel
+{
+    public Guid? Id { get; set; }
+    public string Text { get; set; } = string.Empty;
 }

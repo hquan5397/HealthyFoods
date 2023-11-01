@@ -8,6 +8,6 @@ public class ItemProfile : Profile
 {
     public ItemProfile()
     {
-        CreateMap<Item, ItemReponseModel>();
+        CreateMap<ImportedItem, ItemReponseModel>();
     }
 }

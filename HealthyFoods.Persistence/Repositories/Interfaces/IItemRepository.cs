@@ -2,7 +2,7 @@
 
 namespace HealthyFoods.Persistence.Repositories.Interfaces
 {
-    public interface IItemRepository : IBaseRepository<Item>
+    public interface IItemRepository : IBaseRepository<ImportedItem>
     {
     }
 }
